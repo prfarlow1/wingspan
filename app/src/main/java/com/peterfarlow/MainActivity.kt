@@ -3,7 +3,12 @@ package com.peterfarlow
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -83,6 +88,7 @@ fun SettingsScreen() {
 
 @Composable
 fun AboutScreen(navController: NavController) {
+    navController.graph
     Text("about app")
 }
 

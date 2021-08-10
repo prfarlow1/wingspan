@@ -11,13 +11,13 @@ import javax.inject.Inject
 
 @Composable
 fun StartNewGameScreen(navController: NavController, startNewGameViewModel: StartNewGameViewModel = viewModel()) {
+    navController.graph
+    startNewGameViewModel.hashCode()
     Text("start new game")
 }
 
 
 @HiltViewModel
 class StartNewGameViewModel @Inject constructor(
-    private val savedStateHandle: SavedStateHandle,
-) : ViewModel() {
-
-}
+    @Suppress("unused") private val savedStateHandle: SavedStateHandle,
+) : ViewModel()

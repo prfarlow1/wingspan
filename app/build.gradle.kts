@@ -52,7 +52,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
     implementation("com.google.dagger:hilt-android:2.38.1")
     kapt("com.google.dagger:hilt-android-compiler:2.38.1")
-
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0-alpha03")
     implementation("androidx.compose.ui:ui:1.0.1")
     // Tooling support (Previews, etc.)
     implementation("androidx.compose.ui:ui-tooling:1.0.1")

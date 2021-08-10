@@ -16,7 +16,6 @@ fun StartNewGameScreen(navController: NavController, startNewGameViewModel: Star
     Text("start new game")
 }
 
-
 @HiltViewModel
 class StartNewGameViewModel @Inject constructor(
     @Suppress("unused") private val savedStateHandle: SavedStateHandle,

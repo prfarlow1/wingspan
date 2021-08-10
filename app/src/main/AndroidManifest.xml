@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.peterfarlow">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".WingspanApplication"
         android:allowBackup="false"
@@ -11,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Wingspan">
 
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:exported="false">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,6 +24,5 @@
         </activity>
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

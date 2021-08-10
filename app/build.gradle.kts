@@ -49,4 +49,21 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
     implementation("com.google.dagger:hilt-android:2.38.1")
     kapt("com.google.dagger:hilt-android-compiler:2.38.1")
+
+    implementation("androidx.compose.ui:ui:1.0.1")
+    // Tooling support (Previews, etc.)
+    implementation("androidx.compose.ui:ui-tooling:1.0.1")
+    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
+    implementation("androidx.compose.foundation:foundation:1.0.1")
+    // Material Design
+    implementation("androidx.compose.material:material:1.0.1")
+    // Material design icons
+    implementation("androidx.compose.material:material-icons-core:1.0.1")
+    implementation("androidx.compose.material:material-icons-extended:1.0.1")
+    // Integration with observables
+    implementation("androidx.compose.runtime:runtime-livedata:1.0.1")
+    implementation("androidx.compose.runtime:runtime-rxjava2:1.0.1")
+
+    // UI Tests
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.0.1")
 }

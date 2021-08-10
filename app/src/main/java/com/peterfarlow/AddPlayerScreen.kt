@@ -43,6 +43,7 @@ fun AddPlayerScreen(
                 .padding(horizontal = 8.dp, vertical = 4.dp)
                 .fillMaxWidth(),
             placeholder = { Text(stringResource(R.string.enter_player_name)) })
+        TokenColorPicker(selectedColor, onColorSelectedListener = { selectedColor = it })
         Button(
             onClick = {
                 val color = selectedColor ?: return@Button
@@ -55,7 +56,6 @@ fun AddPlayerScreen(
         ) {
             Text(stringResource(R.string.add_player))
         }
-        TokenColorPicker(selectedColor, onColorSelectedListener = { selectedColor = it })
     }
 }
 

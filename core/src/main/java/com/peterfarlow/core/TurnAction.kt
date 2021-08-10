@@ -107,7 +107,7 @@ data class Player(
     val id: Int,
     val name: String,
     val tokenColor: TokenColor,
-    val state: PlayerState,
+    val state: PlayerState = PlayerState(),
 )
 
 enum class TokenColor {

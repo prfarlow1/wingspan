@@ -16,10 +16,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navigation
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,8 +43,19 @@ fun HomeScreen() {
             composable(route = "home") {
                 MainEntryPointScreen(navController)
             }
-            composable(route = "start_new_game") {
-                StartNewGameScreen(navController)
+            navigation(startDestination = "player_list", route = "start_new_game") {
+                composable(route = "player_list") {
+                    val parentViewModel = hiltViewModel<StartNewGameViewModel>(
+                        navController.getBackStackEntry("start_new_game")
+                    )
+                    NewGamePlayerListScreen(parentViewModel)
+                }
+                composable(route = "add_player") {
+                    val parentViewModel = hiltViewModel<StartNewGameViewModel>(
+                        navController.getBackStackEntry("start_new_game")
+                    )
+                    AddPlayerScreen(parentViewModel)
+                }
             }
             composable(route = "settings") {
                 SettingsScreen()

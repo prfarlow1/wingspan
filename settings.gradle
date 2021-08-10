@@ -7,3 +7,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Wingspan"
 include ':app'
+include ':core'

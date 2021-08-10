@@ -106,11 +106,11 @@ data class PlayBirdAction(
 data class Player(
     val id: Int,
     val name: String,
-    val color: Color,
+    val tokenColor: TokenColor,
     val state: PlayerState,
 )
 
-enum class Color {
+enum class TokenColor {
     RED,
     BLUE,
     PURPLE,

@@ -44,6 +44,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":core"))
+    implementation("com.google.android.material:material:1.4.0")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
     implementation("androidx.core:core-ktx:1.6.0")
     implementation("androidx.appcompat:appcompat:1.3.1")

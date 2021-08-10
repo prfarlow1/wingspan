@@ -18,7 +18,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -94,7 +93,11 @@ class StartNewGameViewModel @Inject constructor(
         return listOf(peter, alex, tj)
     }
 
-    fun addPlayer(player: Player) {
-        players += player
+    fun addPlayer(playerName: String, color: TokenColor) {
+        players += Player(nextId(), playerName, color)
+    }
+
+    fun nextId(): Int {
+        return players.maxByOrNull { it.id }?.id ?: 0 + 1
     }
 }

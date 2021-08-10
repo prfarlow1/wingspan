@@ -48,7 +48,7 @@ fun HomeScreen() {
                     val parentViewModel = hiltViewModel<StartNewGameViewModel>(
                         navController.getBackStackEntry("start_new_game")
                     )
-                    NewGamePlayerListScreen(parentViewModel)
+                    NewGamePlayerListScreen(parentViewModel, navController)
                 }
                 composable(route = "add_player") {
                     val parentViewModel = hiltViewModel<StartNewGameViewModel>(

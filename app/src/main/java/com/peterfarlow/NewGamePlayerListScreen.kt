@@ -23,14 +23,17 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.peterfarlow.core.Player
 import com.peterfarlow.core.TokenColor
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-@Preview
 @Composable
-fun NewGamePlayerListScreen(startNewGameViewModel: StartNewGameViewModel = viewModel()) {
+fun NewGamePlayerListScreen(
+    startNewGameViewModel: StartNewGameViewModel = viewModel(),
+    navController: NavController
+) {
     Column(modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.End
     ) {
@@ -45,7 +48,7 @@ fun NewGamePlayerListScreen(startNewGameViewModel: StartNewGameViewModel = viewM
                 PlayerCard(name = player.name, tokenColor = player.tokenColor)
             }
         }
-        FloatingActionButton(onClick = { /*TODO*/ },
+        FloatingActionButton(onClick = { navController.navigate("add_player") },
             modifier = Modifier
         ) {
             Icon(Icons.Default.Add, stringResource(R.string.add_player))

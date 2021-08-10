@@ -47,7 +47,6 @@ dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
     implementation("androidx.core:core-ktx:1.6.0")
     implementation("androidx.appcompat:appcompat:1.3.1")
-    implementation("com.google.android.material:material:1.4.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
@@ -64,9 +63,6 @@ dependencies {
     // Material design icons
     implementation("androidx.compose.material:material-icons-core:1.0.1")
     implementation("androidx.compose.material:material-icons-extended:1.0.1")
-    // Integration with observables
-    implementation("androidx.compose.runtime:runtime-livedata:1.0.1")
-    implementation("androidx.compose.runtime:runtime-rxjava2:1.0.1")
 
     // UI Tests
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.0.1")

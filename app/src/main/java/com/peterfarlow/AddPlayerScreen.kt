@@ -39,13 +39,19 @@ fun AddPlayerScreen(
     ) {
         TextField(value = playerName,
             onValueChange = { playerName = it },
+            modifier = Modifier
+                .padding(horizontal = 8.dp, vertical = 4.dp)
+                .fillMaxWidth(),
             placeholder = { Text(stringResource(R.string.enter_player_name)) })
-        Button(onClick = {
-            val color = selectedColor ?: return@Button
-            if (playerName.isBlank()) return@Button
-            startNewGameViewModel.addPlayer(playerName, color)
-            navController.popBackStack()
-        }
+        Button(
+            onClick = {
+                val color = selectedColor ?: return@Button
+                if (playerName.isBlank()) return@Button
+                startNewGameViewModel.addPlayer(playerName, color)
+                navController.popBackStack()
+            },
+            modifier = Modifier
+                .padding(horizontal = 8.dp, vertical = 4.dp)
         ) {
             Text(stringResource(R.string.add_player))
         }

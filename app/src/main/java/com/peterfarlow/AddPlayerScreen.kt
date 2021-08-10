@@ -5,9 +5,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
@@ -32,19 +33,18 @@ fun AddPlayerScreen(
     navController: NavController
 ) {
     var selectedColor by remember { mutableStateOf<TokenColor?>(null) }
-    val defaultText = stringResource(R.string.enter_player_name)
-    var playerName by remember { mutableStateOf(defaultText) }
+    var playerName by remember { mutableStateOf("") }
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
         TextField(value = playerName,
-            onValueChange = { playerName = it })
+            onValueChange = { playerName = it },
+            placeholder = { Text(stringResource(R.string.enter_player_name)) })
         Button(onClick = {
-            val color = selectedColor
-            if (color != null && playerName != defaultText) {
-                startNewGameViewModel.addPlayer(playerName, color)
-                navController.popBackStack()
-            }
+            val color = selectedColor ?: return@Button
+            if (playerName.isBlank()) return@Button
+            startNewGameViewModel.addPlayer(playerName, color)
+            navController.popBackStack()
         }
         ) {
             Text(stringResource(R.string.add_player))
@@ -59,31 +59,41 @@ fun TokenColorPicker(
     onColorSelectedListener: (TokenColor) -> Unit
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
     ) {
+        val modifier = Modifier
+            .padding(2.dp)
+            .weight(1f)
         TokenColorIcon(
             selected = selectedColor == TokenColor.RED,
             color = TokenColor.RED,
+            modifier = modifier,
             onColorSelectedListener = onColorSelectedListener
         )
         TokenColorIcon(
             selected = selectedColor == TokenColor.BLUE,
             color = TokenColor.BLUE,
+            modifier = modifier,
             onColorSelectedListener = onColorSelectedListener
         )
         TokenColorIcon(
             selected = selectedColor == TokenColor.PURPLE,
             color = TokenColor.PURPLE,
+            modifier = modifier,
             onColorSelectedListener = onColorSelectedListener
         )
         TokenColorIcon(
             selected = selectedColor == TokenColor.GREEN,
             color = TokenColor.GREEN,
+            modifier = modifier,
             onColorSelectedListener = onColorSelectedListener
         )
         TokenColorIcon(
             selected = selectedColor == TokenColor.YELLOW,
             color = TokenColor.YELLOW,
+            modifier = modifier,
             onColorSelectedListener = onColorSelectedListener
         )
     }
@@ -93,6 +103,7 @@ fun TokenColorPicker(
 fun TokenColorIcon(
     selected: Boolean = false,
     color: TokenColor,
+    modifier: Modifier,
     onColorSelectedListener: (TokenColor) -> Unit
 ) {
     val border = if (selected) {
@@ -102,11 +113,12 @@ fun TokenColorIcon(
     }
     Button(
         onClick = { onColorSelectedListener(color) },
-        border = border
+        border = border,
+        modifier = modifier
     ) {
         Box(
             modifier = Modifier
-                .size(50.dp)
+                .aspectRatio(1f)
                 .clip(CircleShape)
                 .background(color.asComposeColor())
         )

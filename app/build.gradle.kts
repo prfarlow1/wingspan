@@ -1,10 +1,11 @@
-
 plugins {
     id("com.android.application")
     kotlin("android")
     id("kotlin-parcelize")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
+    id("io.gitlab.arturbosch.detekt").version("1.18.0-RC3")
+    id("com.diffplug.spotless") version "5.14.2"
 }
 
 android {
@@ -73,4 +74,47 @@ dependencies {
 
     implementation("io.coil-kt:coil-compose:1.3.2")
 
+}
+
+detekt {
+    buildUponDefaultConfig = true // preconfigure defaults
+    allRules = false // activate all available (even unstable) rules.
+    config =
+        files("$projectDir/config/detekt.yml") // point to your custom config defining rules to run, overwriting default behavior
+    baseline =
+        file("$projectDir/config/baseline.xml") // a way of suppressing issues before introducing detekt
+
+    reports {
+        html.enabled = true // observe findings in your browser with structure and code snippets
+        xml.enabled = true // checkstyle like format mainly for integrations like Jenkins
+        txt.enabled =
+            true // similar to the console output, contains issue signature to manually edit baseline files
+        sarif.enabled =
+            true // standardized SARIF format (https://sarifweb.azurewebsites.net/) to support integrations with Github Code Scanning
+    }
+}
+
+// Kotlin DSL
+tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
+    // Target version of the generated JVM bytecode. It is used for type resolution.
+    jvmTarget = "1.8"
+}
+
+spotless {
+    format("misc") {
+        // define the files to apply `misc` to
+        target("*.md", ".gitignore")
+
+        // define the steps to apply to those files
+        trimTrailingWhitespace()
+        indentWithTabs() // or spaces. Takes an integer argument if you don't like 4
+        endWithNewline()
+    }
+    kotlin {
+        target("**/*.kt")
+        ktlint("0.41.0")
+        trimTrailingWhitespace()
+        indentWithSpaces()
+        endWithNewline()
+    }
 }

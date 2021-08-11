@@ -36,7 +36,7 @@ import com.peterfarlow.core.TokenColor
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.updateAndGet
 import javax.inject.Inject
 
 @Composable
@@ -70,7 +70,6 @@ fun NewGamePlayerListScreen(
         ) {
             Icon(Icons.Default.Add, stringResource(R.string.add_player))
         }
-
     }
 }
 
@@ -86,24 +85,26 @@ fun PlayerCard(player: Player, onClick: (Player) -> Unit) {
         ClickableText(
             text = AnnotatedString(player.name),
             style = TextStyle(color = contentColorFor(backgroundColor)),
-            onClick = { onClick(player) })
+            onClick = { onClick(player) }
+        )
     }
 }
 
 fun TokenColor.asComposeColor(): Color = when (this) {
     TokenColor.RED -> Color.Red
     TokenColor.BLUE -> Color.Blue
-    TokenColor.PURPLE -> Color(0xff8e24aa)
+    TokenColor.PURPLE -> Color(purple)
     TokenColor.GREEN -> Color.Green
     TokenColor.YELLOW -> Color.Yellow
 }
 
 @HiltViewModel
 class StartNewGameViewModel @Inject constructor(
-    @Suppress("unused") private val savedStateHandle: SavedStateHandle,
+    private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
     companion object {
+        const val PLAYERS_KEY = "playerskey"
         private val defaultPlayers = listOf(
             Player(0, "Peter", TokenColor.BLUE),
             Player(1, "Alex", TokenColor.YELLOW),
@@ -111,19 +112,25 @@ class StartNewGameViewModel @Inject constructor(
         )
     }
 
-    private val _playerFlow = MutableStateFlow(defaultPlayers)
+    private val _playerFlow = MutableStateFlow(savedStateHandle.get(PLAYERS_KEY) ?: defaultPlayers)
     val playerFlow: StateFlow<List<Player>> = _playerFlow
 
     fun addPlayer(playerName: String, color: TokenColor) {
-        _playerFlow.update {
+        val newValue = _playerFlow.updateAndGet {
             it + Player(nextId(), playerName, color)
         }
+        savedStateHandle.set(PLAYERS_KEY, newValue)
     }
 
     fun deletePlayer(player: Player) {
-        _playerFlow.update {
+        val newValue = _playerFlow.updateAndGet {
             it - player
         }
+        savedStateHandle.set(PLAYERS_KEY, newValue)
+    }
+
+    fun createGame() {
+        savedStateHandle.set(PLAYERS_KEY, null)
     }
 
     private fun nextId(): Int {

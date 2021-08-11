@@ -2,15 +2,12 @@ name: Android CI
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: set up JDK 11
@@ -18,8 +15,9 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
-
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
+    - name: spotless
+      run: ./gradlew spotlessCheck

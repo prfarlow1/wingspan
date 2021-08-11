@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 private val DarkColors = darkColors()
 private val LightColors = lightColors()
 
-const val purple = 0xff8e24aa
+const val PURPLE = 0xff8e24aa
 
 @Composable
 fun WingspanTheme(

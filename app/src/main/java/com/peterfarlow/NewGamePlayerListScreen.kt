@@ -25,6 +25,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -84,7 +85,11 @@ fun PlayerCard(player: Player, onClick: (Player) -> Unit) {
     ) {
         ClickableText(
             text = AnnotatedString(player.name),
-            style = TextStyle(color = contentColorFor(backgroundColor)),
+            modifier = Modifier.padding(16.dp),
+            style = TextStyle(
+                color = contentColorFor(backgroundColor),
+                fontSize = 16.sp
+            ),
             onClick = { onClick(player) }
         )
     }
@@ -93,7 +98,7 @@ fun PlayerCard(player: Player, onClick: (Player) -> Unit) {
 fun TokenColor.asComposeColor(): Color = when (this) {
     TokenColor.RED -> Color.Red
     TokenColor.BLUE -> Color.Blue
-    TokenColor.PURPLE -> Color(purple)
+    TokenColor.PURPLE -> Color(PURPLE)
     TokenColor.GREEN -> Color.Green
     TokenColor.YELLOW -> Color.Yellow
 }

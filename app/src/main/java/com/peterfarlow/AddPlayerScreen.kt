@@ -37,12 +37,14 @@ fun AddPlayerScreen(
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        TextField(value = playerName,
+        TextField(
+            value = playerName,
             onValueChange = { playerName = it },
             modifier = Modifier
                 .padding(horizontal = 8.dp, vertical = 4.dp)
                 .fillMaxWidth(),
-            placeholder = { Text(stringResource(R.string.enter_player_name)) })
+            placeholder = { Text(stringResource(R.string.enter_player_name)) }
+        )
         TokenColorPicker(selectedColor, onColorSelectedListener = { selectedColor = it })
         Button(
             onClick = {

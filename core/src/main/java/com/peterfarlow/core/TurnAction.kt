@@ -18,7 +18,7 @@ data class Bird(
     val latinName: String = "",
     val points: Points = 0,
     val habitat: Set<Habitat>,
-    val foodCosts: Set<FoodCost>,
+    val foodCost: FoodCost,
     val nestType: NestType,
     val description: String = "",
     val wingspan: Int,
@@ -54,16 +54,6 @@ enum class NestType {
     NONE
 }
 
-
-enum class Food {
-    WORM,
-    WHEAT,
-    MOUSE,
-    FISH,
-    CHERRY,
-    WILD
-}
-
 enum class FoodDiceFace {
     WORM,
     WHEAT,
@@ -72,8 +62,6 @@ enum class FoodDiceFace {
     CHERRY,
     WORM_WHEAT
 }
-
-typealias FoodCost = Set<Food>
 
 @Parcelize
 data class PlayerFoodSupply(
